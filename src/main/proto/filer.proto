@@ -177,6 +177,8 @@ message FuseAttributes {
 message CreateHardLinkRequest {
     FullEntry fromEntry = 1;
     FullEntry toEntry = 2;
+    string targetDir = 3;
+    string  targetName = 4;
 }
 
 message CreateHardLinkResponse {

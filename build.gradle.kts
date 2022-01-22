@@ -3,6 +3,7 @@ import com.google.protobuf.gradle.*
 
 plugins {
     kotlin("jvm") version "1.6.10"
+    `maven-publish`
 
 //    id("com.cognifide.common") version "1.0.37"
     id("com.google.protobuf") version "0.8.18"

@@ -166,19 +166,20 @@ class FilerClientKt(host: String?, grpcPort: Int) :
             )
     }
 
-    suspend fun listEntries(path: String?): List<Entry> {
+    suspend fun listEntries(path: String?, totalLimit: Int = Int.MAX_VALUE): List<Entry> {
         val results: MutableList<Entry> = ArrayList()
         var lastFileName = ""
-        var limit = Int.MAX_VALUE
+        var limit = totalLimit
+        val chunkSize = Integer.min(1024, limit)
         while (limit > 0) {
-            val t = listEntries(path, "", lastFileName, 1024, false) ?: break
+            val t = listEntries(path, "", lastFileName, chunkSize, false) ?: break
             val nSize = t.size
             if (nSize > 0) {
                 limit -= nSize
                 lastFileName = t[nSize - 1].name
             }
             results.addAll(t)
-            if (t.size < 1024) {
+            if (t.size < chunkSize) {
                 break
             }
         }

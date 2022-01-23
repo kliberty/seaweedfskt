@@ -75,3 +75,11 @@ protobuf {
         }
     }
 }
+
+publishing {
+    publications {
+        register<MavenPublication>("gpr") {
+            from(components["java"])
+        }
+    }
+}

@@ -21,7 +21,7 @@ class FilerClientKt(host: String?, grpcPort: Int) :
         return mkdirs(path, mode, 0, 0, currentUser, arrayOf())
     }
 
-    val channel = ManagedChannelBuilder.forAddress("box.lan", 17777).usePlaintext()
+    val channel = ManagedChannelBuilder.forAddress(host, grpcPort).usePlaintext()
         .maxInboundMessageSize(1024 * 1024 * 1024).build()
     val stub = SeaweedFilerGrpcKt.SeaweedFilerCoroutineStub(channel)
 
